@@ -15,8 +15,10 @@ Things to know:
 
 # How React Works
 
+
+How we see it        | How react sees it
 ---------------------|-----------------
-```                  | ```   
+```                  |   
 const App = () => {  | Object{ 
   return {           |  $$typof: Symbol(react.element),
     <div>            |  key: null,
@@ -25,7 +27,7 @@ const App = () => {  | Object{
   }                  |  type: "div"
 }                    | }    
                      |     
-```                    ```      
+```                         
                           
                           
                           
