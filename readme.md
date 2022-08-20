@@ -71,14 +71,14 @@ What happens behind the scenes is:
   1. The JSX gets converted to many `React.createElement()` function calls which results in a tree of elements.
   2. Then, each of those function calls returns object similar to the above object.
 
-const App = () => {
-  return 
-  React.createElement("div", null , "App Component")
-}
+>> const App = () => {
+    return 
+    React.createElement("div", null , "App Component")
+  }
 
-Note: The Fact that JSX gets converted into React.createElement() function call is the reason we always have to import React at the top while working with JSX.
+>> Note: The Fact that JSX gets converted into React.createElement() function call is the reason we always have to import React at the top while working with JSX.
 
-We actually don't call a component we just mention it in the JSX like this `<App/>`.React calls it behind the scenes.
+>> We actually don't call a component we just mention it in the JSX like this `<App/>`.React calls it behind the scenes.
  - If it is a function React calls it directly with the assigned props.
  - If it is a class React creates a new instance of it and calls it render() method.
 
