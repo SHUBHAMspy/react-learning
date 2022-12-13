@@ -18,6 +18,17 @@ Hence, the document is shown by DOM as a set of nodes and objects that can be ch
 - React.JS is not a framework of JavaScript like Angular or React Native.
 - It handles the View layer of MVC (Model View Controller) application.
 
+Features:
+1. JSX: It is an syntax extension to Javscript.The JSX gets converted to many React.createElement() calls.It describes your UI.
+
+2. Unidirectional flow: React is based on Flux architecture, data should flow from parent to the child or parent component to child component.
+
+3. Virtual Dom:  Virtual dom is basically a JS object that represents the real dom in memory it is actually the  tree of elements which decribes the element tree.
+
+4. Declarative & Component Based: React allows you to declaratively describe you UI, using component based architecture.
+
+5. Reuseability & Composition: React components can be reused to form bigger components and two different components can be composed together to form the desired UI.
+
 Things to know:
 - React Component
 - React Element
@@ -152,4 +163,38 @@ What happens behind the scenes is:
   The ref is used to return a reference to the element. They should be avoided in most cases, however, they can be useful when you need a direct access to the DOM element or an instance of a component.
 
 
+# Lifecycle in react
+Every component in react has a lifecycle that it goes through.
+Based on this React has categorized the lifecycle of a component into 3 different phases:
+1. Mounting
+2. Updating
+3. Unmounting
+
+Mounting: Mounting means to put elements into the DOM that involves creating and putting it into the DOM. Mounting phase uses 4 methods to mount a component namely:
+1. constructor() : It is called when the component is initiated and it is the best place to initialize our 
+    state. It takes props as argument and starts by calling super(props)
+2. getDerivedStateFromProps(): It is called right before rendering the element in the dom.It takes 
+    props and state as an argument and returns an derived or updated state.
+3. render(): It is the only compulsory method required by react.It is responsible for rendering our 
+    JSX to DOM.
+4. componentDidMount() : This method is called after the component is rendered . It is also used 
+    to fetch external data through api
+
+2. Updating Phase: This is the second phase of the react component lifecycle. A component is updated when there is change in state and props .While updating components react calls these 5 methods inorder namely:
+1. getDerivedStateFromProps()
+2. shouldComponentUpdate(): It is used when you want your state or props to be updated or not 
+    basically it checks that rendering should happen or not.It is used for optimization purposes. It 
+    returns a boolean value .
+3. render()
+4. getSnapshotBeforeUpdate(): It is called right before updating the DOM.It has access to state 
+   and props before the update so that you can check what is the value of state and props right 
+    before update.
+5. componentDidUpdate(): It is caled after the component has updated in the dom .It is the best 
+    place in updating the dom in response to the change of props and state.
+
+3. Unmounting: This is the final phase of a react component lifecycle.It occurs when a component 
+    has been removed from the dom. It has only one method:
+    1. componentWillUnmount():  It is used for cleanup actions like cancelling api calls , removing 
+        subcriptions and timers. You cannot use setstate here as the component gets unmounted 
+        and no re-rendering will happen.
 
