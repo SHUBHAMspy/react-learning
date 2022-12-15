@@ -25,14 +25,32 @@ Features:
 
 3. Virtual Dom:  Virtual dom is basically a JS object that represents the real dom in memory it is actually the  tree of elements which decribes the element tree.
 
-4. Declarative & Component Based: React allows you to declaratively describe you UI, using component based architecture.
+4. Declarative & Component Based: React allows you to declaratively describe your UI, using component based architecture.
 
 5. Reuseability & Composition: React components can be reused to form bigger components and two different components can be composed together to form the desired UI.
+
+Advantages:
+1. The main advantage of react that i feel that the scripting can be utilized for mobile development as well.
+
+2. As React creates virtual dom , this improves performance as JS virtual dom is faster than regular dom.
+
+3. Defining ui though components using a declarative syntax, improves readability and debugging.
+4. React supports flux architecture , which promotes state immutability i.e it does not allow to modify state directly.
+
+5. Separation of concerns and modularity.
+6. Scalable ui becuase of composition and reusable component architecture.
+
+Limitations: 
+1. Its sole purpose is also its limitation i.e it only handle view layer of the application. Which was its motivation to separate view from network and business logic.
+
+2. It also has some learning curve.
+
 
 Things to know:
 - React Component
 - React Element
 - Component Instance
+- JSX
 
 **React Element**: A React element is a plain Javascript object which represents or describes a HTML element, which is created by React.createElement. Not only a react element represents or describes a HTML element but also a react element tree decribes a component instance.
 
@@ -42,6 +60,20 @@ If it is a class the output is the return value of the render() method.
 
 **Component Instance**: React creates instance of a component to keep track of the component after the react element describes the component or the element tree has been created.
 Each component has its state and lifecycle through which it goes.
+
+If we want to render something in plain HTML it would be like this
+    `<h1>Introduction to React</h1>`
+But if we want to do the samething in React then we first need to create a react element of type h1 with content or children as 'Introduction to React' which will eventually spit out the heading onto the webpage.
+For this React provides us a method called `React.createElement`.Using this method we can create react elements of any type.
+    `const App = React.createElement('h1', null, 'Introduction to React')`
+we need to somehow tell React to take this react element App and display it on the webpage using DOM.
+And the way we do that is we say 
+    `ReactDOM.render(App,document.getElementById('root'))`
+render([what],[where]) method takes two arguments, the second argument is the target or the container DOM node, the purpose of this is to serve as mount point to hold our element or the root container.  
+> Note: ReactDOM is a different library, which was a part of React but it was removed to promote it's  component driven ideology to compose reusable components together to form UI and to promote its platform independency i.e regardless of the environment or platform react can be used to compose components. 
+
+So, React knows how to create components as well as to compose them.
+Whereas, react-dom is a renderer package which handles the DOM part of react and is responsible for making changes in the environment to render the UI on the corresponding platform.
 
 
 ## Why React
@@ -152,17 +184,6 @@ What happens behind the scenes is:
 
   React then sets a short timeout, and when it expires, runs all the useEffect hooks. This step is also known as the "Passive Effects" phase.
 
-## State
-  State generally refers to the present condition of a system or entity.
-  State and data are confused as one and the same thing or that state translates to data.
-  Though data governs the state or what state will be.But it is not equal to state.
-
-  In computer science, state is defined by input(here referenced as data), output and the transition
-
-## Refs
-  The ref is used to return a reference to the element. They should be avoided in most cases, however, they can be useful when you need a direct access to the DOM element or an instance of a component.
-
-
 # Lifecycle in react
 Every component in react has a lifecycle that it goes through.
 Based on this React has categorized the lifecycle of a component into 3 different phases:
@@ -197,4 +218,32 @@ Mounting: Mounting means to put elements into the DOM that involves creating and
     1. componentWillUnmount():  It is used for cleanup actions like cancelling api calls , removing 
         subcriptions and timers. You cannot use setstate here as the component gets unmounted 
         and no re-rendering will happen.
+
+## Props:
+  1. Props is short for properties. It is used for passing data between components since, react follows unidirectional flow therefore props are passed from parent to child component.
+  2. Data from props is read-only and cannot be modified by a component that is receiving from outside i.e props are immutable.
+  3. In order to get data in props , we need to define prop attribute on child component and get data from parent component.
+  4. Props do not have to be just data but callbacks can also be passed as props.
+
+## State
+  State generally refers to the present condition of a system or entity.
+  State and data are confused as one and the same thing or that state translates to data.
+  Though data governs the state or what state will be.But it is not equal to state.
+
+  In computer science, state is defined by input(here referenced as data), output and the transition
+
+  2. Data can be a data structure(an object) or a single value.It is use to initailize or set a default value when a component mounts.
+  3. A component can create & manage their own data internally for state. i.e it is private to the component.
+  4. State can be modified or updated by setState() method and should not be modified directly.
+
+  And because of these differences we have two classes of components:
+  1. *Stateless Components* : They have only props and no internal data, their logic revolves around the props they receive.
+  2. *Stateful Components*: They have both props as well as internal data to convey the state.
+  
+  props are used by a component to get data from external environment i.e another component ( pure, functional or class) or a general class or javascript/typescript code
+  states are used to manage the internal environment of a component means the data changes inside the component
+
+## Refs
+  The ref is used to return a reference to the element. They should be avoided in most cases, however, they can be useful when you need a direct access to the DOM element or an instance of a component.
+
 
