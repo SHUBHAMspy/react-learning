@@ -18,7 +18,7 @@ Hence, the document is shown by DOM as a set of nodes and objects that can be ch
 - React.JS is not a framework of JavaScript like Angular or React Native.
 - It handles the View layer of MVC (Model View Controller) application.
 
-Features:
+**Features**:
 1. JSX: It is an syntax extension to Javscript.The JSX gets converted to many React.createElement() calls.It describes your UI.
 
 2. Unidirectional flow: React is based on Flux architecture, data should flow from parent to the child or parent component to child component.
@@ -29,7 +29,7 @@ Features:
 
 5. Reuseability & Composition: React components can be reused to form bigger components and two different components can be composed together to form the desired UI.
 
-Advantages:
+**Advantages**:
 1. The main advantage of react that i feel that the scripting can be utilized for mobile development as well.
 
 2. As React creates virtual dom , this improves performance as JS virtual dom is faster than regular dom.
@@ -61,20 +61,47 @@ If it is a class the output is the return value of the render() method.
 **Component Instance**: React creates instance of a component to keep track of the component after the react element describes the component or the element tree has been created.
 Each component has its state and lifecycle through which it goes.
 
+### React and React DOM
 If we want to render something in plain HTML it would be like this
-    `<h1>Introduction to React</h1>`
+
+  `<h1>Introduction to React</h1>`
+
 But if we want to do the samething in React then we first need to create a react element of type h1 with content or children as 'Introduction to React' which will eventually spit out the heading onto the webpage.
 For this React provides us a method called `React.createElement`.Using this method we can create react elements of any type.
-    `const App = React.createElement('h1', null, 'Introduction to React')`
+
+  `const App = React.createElement('h1', null, 'Introduction to React')`
+
 we need to somehow tell React to take this react element App and display it on the webpage using DOM.
 And the way we do that is we say 
-    `ReactDOM.render(App,document.getElementById('root'))`
+
+  `ReactDOM.render(App,document.getElementById('root'))`
 render([what],[where]) method takes two arguments, the second argument is the target or the container DOM node, the purpose of this is to serve as mount point to hold our element or the root container.  
+
 > Note: ReactDOM is a different library, which was a part of React but it was removed to promote it's  component driven ideology to compose reusable components together to form UI and to promote its platform independency i.e regardless of the environment or platform react can be used to compose components. 
 
 So, React knows how to create components as well as to compose them.
 Whereas, react-dom is a renderer package which handles the DOM part of react and is responsible for making changes in the environment to render the UI on the corresponding platform.
 
+**JSX**: JSX is Javascript Syntax Extention it is nothing but extension to Javasript but not exactly a Javascript code. It gets compiled/ transpiled during the build process to React.createElement calls which is a valid JS that our browser can understand. It replaces the need of using React.createElement() method  by providing a more concise and declarative syntax. 
+Since HTML style of DOM element creation is much more expressive,concise and declarative. So, JSX let's us use the same HTML like syntax inside our javascript code i.e in a declarative manner which will eventually produce DOM nodes on the webpage. 
+
+`const App = <h1>Introduction to React</h1>`
+
+### Ways to render
+The difference between 
+  `const app = <h1>Introduction to React</h1>`
+                
+          and
+  ```
+const Component = () => {
+  return (
+    <h1>Introduction to React</h1>
+  )  
+}
+```
+App is a variable that holds a static value of React element whereas
+Component is a function that gives or returns React Element.
+Both gives React elements, But Components are much more flexible and reuseable than the variable,since it can accept arguments as input and can also perform some logic on it before returning React element.
 
 ## Why React
   Things are simpler when UI components are unaware of the network, business logic, or app state. Given the same props, always render the same data.
@@ -87,7 +114,7 @@ A simple React component that returns React Elements:
 
 ```
 const App = () => {
-  return ()
+  return (
     <div> 
       App Component
     </div>
@@ -97,17 +124,17 @@ const App = () => {
 When we call this component `console.log(App())` we get the real return value.
 
 
-How we see it         |          How react sees it(The real returned Value) |
-----------------------|-----------------------------------------------------|
-```                   |                                                     |
-const App = () => {   |    Object{                                          |
-  return (            |      $$typof: Symbol(react.element),                |
-    <div>             |      key: null,                                     |
-      App Component   |      props: {children: "App Component"},            |
-    </div>            |      ref: null,                                     |
-  )                   |      type: "div"                                    |
-}                     |    }                                                |
-                      |                                                     |
+  How we see it         |          How react sees it(The real returned Value) |
+------------------------|-----------------------------------------------------|
+```                     |                                                     |
+const App = () => {     |    Object{                                          |
+  return (              |      $$typof: Symbol(react.element),                |
+    <div>               |      key: null,                                     |
+      App Component     |      props: {children: "App Component"},            |
+    </div>              |      ref: null,                                     |
+  )                     |      type: "div"                                    |
+}                       |    }                                                |
+                        |                                                     |
 ```      
 
 What happens behind the scenes is:
@@ -192,34 +219,35 @@ Based on this React has categorized the lifecycle of a component into 3 differen
 3. Unmounting
 
 Mounting: Mounting means to put elements into the DOM that involves creating and putting it into the DOM. Mounting phase uses 4 methods to mount a component namely:
-1. constructor() : It is called when the component is initiated and it is the best place to initialize our 
+1. *constructor()* : It is called when the component is initiated and it is the best place to initialize our 
     state. It takes props as argument and starts by calling super(props)
-2. getDerivedStateFromProps(): It is called right before rendering the element in the dom.It takes 
+2. *getDerivedStateFromProps()*: It is called right before rendering the element in the dom.It takes 
     props and state as an argument and returns an derived or updated state.
-3. render(): It is the only compulsory method required by react.It is responsible for rendering our 
+3. *render()*: It is the only compulsory method required by react.It is responsible for rendering our 
     JSX to DOM.
-4. componentDidMount() : This method is called after the component is rendered . It is also used 
+4. *componentDidMount()* : This method is called after the component is rendered . It is also used 
     to fetch external data through api
 
 2. Updating Phase: This is the second phase of the react component lifecycle. A component is updated when there is change in state and props .While updating components react calls these 5 methods inorder namely:
-1. getDerivedStateFromProps()
-2. shouldComponentUpdate(): It is used when you want your state or props to be updated or not 
+1. *getDerivedStateFromProps()*
+2. *shouldComponentUpdate()*: It is used when you want your state or props to be updated or not 
     basically it checks that rendering should happen or not.It is used for optimization purposes. It 
     returns a boolean value .
-3. render()
-4. getSnapshotBeforeUpdate(): It is called right before updating the DOM.It has access to state 
+3. *render()*
+4. *getSnapshotBeforeUpdate()*: It is called right before updating the DOM.It has access to state 
    and props before the update so that you can check what is the value of state and props right 
     before update.
-5. componentDidUpdate(): It is caled after the component has updated in the dom .It is the best 
+5. *componentDidUpdate()*: It is caled after the component has updated in the dom .It is the best 
     place in updating the dom in response to the change of props and state.
 
 3. Unmounting: This is the final phase of a react component lifecycle.It occurs when a component 
     has been removed from the dom. It has only one method:
-    1. componentWillUnmount():  It is used for cleanup actions like cancelling api calls , removing 
+    1. *componentWillUnmount()*:  It is used for cleanup actions like cancelling api calls , removing 
         subcriptions and timers. You cannot use setstate here as the component gets unmounted 
         and no re-rendering will happen.
 
 ## Props:
+  In React, we call the arguments that we pass to a component as props.
   1. Props is short for properties. It is used for passing data between components since, react follows unidirectional flow therefore props are passed from parent to child component.
   2. Data from props is read-only and cannot be modified by a component that is receiving from outside i.e props are immutable.
   3. In order to get data in props , we need to define prop attribute on child component and get data from parent component.
