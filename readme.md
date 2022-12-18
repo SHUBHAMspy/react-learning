@@ -75,6 +75,7 @@ we need to somehow tell React to take this react element App and display it on t
 And the way we do that is we say 
 
   `ReactDOM.render(App,document.getElementById('root'))`
+
 render([what],[where]) method takes two arguments, the second argument is the target or the container DOM node, the purpose of this is to serve as mount point to hold our element or the root container.  
 
 > Note: ReactDOM is a different library, which was a part of React but it was removed to promote it's  component driven ideology to compose reusable components together to form UI and to promote its platform independency i.e regardless of the environment or platform react can be used to compose components. 
@@ -89,19 +90,53 @@ Since HTML style of DOM element creation is much more expressive,concise and dec
 
 ### Ways to render
 The difference between 
+
   `const app = <h1>Introduction to React</h1>`
                 
-          and
+  and
+
   ```
-const Component = () => {
-  return (
-    <h1>Introduction to React</h1>
-  )  
-}
+  const Component = () => {
+    return (
+      <h1>Introduction to React</h1>
+    )  
+  }
 ```
 App is a variable that holds a static value of React element whereas
 Component is a function that gives or returns React Element.
 Both gives React elements, But Components are much more flexible and reuseable than the variable,since it can accept arguments as input and can also perform some logic on it before returning React element.
+Also components need to be in capital letters whereas app which is simply a react element can be in capital or smallcase.Because it conveys a different meaning to the transpiler that capital lettered Component is user defined Element and not native DOM element.
+So, capitalization of Component's first letter is just to make our transpiler distinguish between native DOM nodes and our own components or user defined elements.
+
+```
+  ReactDOM.render(
+    app,          // variable
+    document.getElementById('root')
+  )
+```
+React allows us to use React.createElemwnt over our component
+```
+  React.createElement(
+    React.createElement(Component), // Functional Component
+    document.getElementById('root')
+  )
+```
+The whole point of JSX is not having to write React.createElement everytime
+```
+  React.createElement(
+    <Component></Component>, // JSX
+    document.getElementById('root')
+  )
+```
+If we don't have any children i.e if we don't have anything to in between opening and closing tag of JSX we can use a self closing JSX tag 
+```
+  React.createElement(
+    <Component/>, // self closing JSX
+    document.getElementById('root')
+  )
+```
+Both the above code will get transpiled to React.createElement call over Component.
+Since Componet is user-defined it is not put in with string quotes in React.createElement calls as native elements do.
 
 ## Why React
   Things are simpler when UI components are unaware of the network, business logic, or app state. Given the same props, always render the same data.
