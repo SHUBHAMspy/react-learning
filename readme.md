@@ -1,11 +1,11 @@
-## DOM
+## Dom
 
-DOM stands for "Document Object Model". It represents the entire UI of the web application as a tree data structure.
-Since, HTML is a document & not a scripting language which is based on box-model and since,Javascript is an scripting language it does not understand what document is & HTML is plain document. So, DOM is a representation of the original HTML document, which the JS understands.
+Dom stands for "Document Object Model". It represents the entire UI of the web application as a tree data structure.
+Since, HTML is a document & not a scripting language which is based on box-model and since,JavaScript is an scripting language it does not understand what document is & HTML is plain document. So, Dom is a representation of the original HTML document, which the JS understands.
 
-In the DOM model, the whole HTML document is considered as an object. Each of the tags and elements nested inside one another are also considered as objects forming a hierarical tree like structure.
+In the Dom model, the whole HTML document is considered as an object. Each of the tags and elements nested inside one another are also considered as objects forming a hierarical tree like structure.
 
-Hence, the document is shown by DOM as a set of nodes and objects that can be changed with a scripting language like Javascript i.e DOM is used to connect or link webpages(HTML documents) to Javascript because it understands objects and works upon that model consideration that everything is an object, including the document itself which holds all other objects in a parent-child like box structure & everybody is accountable to the parent and through the document node anything can be accessed.  
+Hence, the document is shown by Dom as a set of nodes and objects that can be changed with a scripting language like JavaScript i.e Dom is used to connect or link webpages(HTML documents) to JavaScript because it understands objects and works upon that model consideration that everything is an object, including the document itself which holds all other objects in a parent-child like box structure & everybody is accountable to the parent and through the document node anything can be accessed.  
 
 ## MVC(Model-View-Controller)
 
@@ -19,26 +19,26 @@ Hence, the document is shown by DOM as a set of nodes and objects that can be ch
 - It handles the View layer of MVC (Model View Controller) application.
 
 **Features**:
-1. JSX: It is an syntax extension to Javscript.The JSX gets converted to many React.createElement() calls.It describes your UI.
+1. JSX: It is an syntax extension to JavaScript.The JSX gets converted to many React.createElement() calls.It describes your UI.
 
 2. Unidirectional flow: React is based on Flux architecture, data should flow from parent to the child or parent component to child component.
 
-3. Virtual Dom:  Virtual dom is basically a JS object that represents the real dom in memory it is actually the  tree of elements which decribes the element tree.
+3. Virtual Dom:  Virtual Dom is basically a JS object that represents the real Dom in memory it is actually the  tree of elements which describes the element tree.
 
 4. Declarative & Component Based: React allows you to declaratively describe your UI, using component based architecture.
 
-5. Reuseability & Composition: React components can be reused to form bigger components and two different components can be composed together to form the desired UI.
+5. Reusability & Composition: React components can be reused to form bigger components and two different components can be composed together to form the desired UI.
 
 **Advantages**:
-1. The main advantage of react that i feel that the scripting can be utilized for mobile development as well.
+1. The main advantage of react that I feel that the scripting can be utilized for mobile development as well.
 
-2. As React creates virtual dom , this improves performance as JS virtual dom is faster than regular dom.
+2. As React creates virtual Dom , this improves performance as JS virtual Dom is faster than regular Dom.
 
-3. Defining ui though components using a declarative syntax, improves readability and debugging.
+3. Defining UI though components using a declarative syntax, improves readability and debugging.
 4. React supports flux architecture , which promotes state immutability i.e it does not allow to modify state directly.
 
 5. Separation of concerns and modularity.
-6. Scalable ui becuase of composition and reusable component architecture.
+6. Scalable UI because of composition and reusable component architecture.
 
 Limitations: 
 1. Its sole purpose is also its limitation i.e it only handle view layer of the application. Which was its motivation to separate view from network and business logic.
@@ -52,39 +52,43 @@ Things to know:
 - Component Instance
 - JSX
 
-**React Element**: A React element is a plain Javascript object which represents or describes a HTML element, which is created by React.createElement. Not only a react element represents or describes a HTML element but also a react element tree decribes a component instance.
+**React Element**: A React element is the smallest building blocks of React Apps. It is basically a plain JavaScript object which represents or describes a HTML element, which is created by React.createElement. Not only a react element represents or describes a HTML element but also a react element tree describes a component instance.
+Creating a React Element is cheap compared to creating a Dom Element. 
 
-**React Component**: A Component is a class or a function that takes input as props and returns/outputs an element tree.
+**React Component**: Components are the building blocks of any React app.A Component is a class or a function that takes input as props and returns/outputs an element tree.
 If it is a function the output is the return value of the function.
 If it is a class the output is the return value of the render() method.
 
 **Component Instance**: React creates instance of a component to keep track of the component after the react element describes the component or the element tree has been created.
 Each component has its state and lifecycle through which it goes.
 
-### React and React DOM
+### React and React Dom
 If we want to render something in plain HTML it would be like this
 
   `<h1>Introduction to React</h1>`
 
-But if we want to do the samething in React then we first need to create a react element of type h1 with content or children as 'Introduction to React' which will eventually spit out the heading onto the webpage.
+But if we want to do the same thing in React then we first need to create a react element of type h1 with content or children as 'Introduction to React' which will eventually spit out the heading onto the webpage.
 For this React provides us a method called `React.createElement`.Using this method we can create react elements of any type.
 
   `const App = React.createElement('h1', null, 'Introduction to React')`
 
-we need to somehow tell React to take this react element App and display it on the webpage using DOM.
+we need to somehow tell React to take this react element App and display it on the webpage using Dom.
 And the way we do that is we say 
 
-  `ReactDOM.render(App,document.getElementById('root'))`
+  `ReactDom.render(App,document.getElementById('root'))`
 
-render([what],[where]) method takes two arguments, the second argument is the target or the container DOM node, the purpose of this is to serve as mount point to hold our element or the root container.  
+render([what],[where]) method takes two arguments, the second argument is the target or the container Dom node, the purpose of this is to serve as mount point to hold our element or the root container.  
 
-> Note: ReactDOM is a different library, which was a part of React but it was removed to promote it's  component driven ideology to compose reusable components together to form UI and to promote its platform independency i.e regardless of the environment or platform react can be used to compose components. 
+> Note: ReactDom is a different library, which was a part of React but it was removed to promote it's  component driven ideology to compose reusable components together to form UI and to promote its platform independency i.e regardless of the environment or platform react can be used to compose components. 
 
 So, React knows how to create components as well as to compose them.
-Whereas, react-dom is a renderer package which handles the DOM part of react and is responsible for making changes in the environment to render the UI on the corresponding platform.
+Whereas, react-Dom is a renderer package which handles the Dom part of react and is responsible for making changes in the environment to render the UI on the corresponding platform.
 
-**JSX**: JSX is Javascript Syntax Extention it is nothing but extension to Javasript but not exactly a Javascript code. It gets compiled/ transpiled during the build process to React.createElement calls which is a valid JS that our browser can understand. It replaces the need of using React.createElement() method  by providing a more concise and declarative syntax. 
-Since HTML style of DOM element creation is much more expressive,concise and declarative. So, JSX let's us use the same HTML like syntax inside our javascript code i.e in a declarative manner which will eventually produce DOM nodes on the webpage. 
+**JSX**: JSX is JavaScript Syntax Extension it is nothing but extension to JavaScript but not exactly a JavaScript code. It gets compiled/ transpiled during the build process to React.createElement calls which is a valid JS that our browser can understand. It replaces the need of using React.createElement() method  by providing a more concise and declarative syntax. 
+Since HTML style of Dom element creation is much more expressive,concise and declarative. So, JSX let's us use the same HTML like syntax inside our JavaScript code i.e in a declarative manner which will eventually produce Dom nodes on the webpage.
+
+>Note : Any JavaScript coding that needs to be evaluated must be kept in {} . But we don't need to use {} for strings
+
 
 `const App = <h1>Introduction to React</h1>`
 
@@ -104,24 +108,24 @@ The difference between
 ```
 App is a variable that holds a static value of React element whereas
 Component is a function that gives or returns React Element.
-Both gives React elements, But Components are much more flexible and reuseable than the variable,since it can accept arguments as input and can also perform some logic on it before returning React element.
-Also components need to be in capital letters whereas app which is simply a react element can be in capital or smallcase.Because it conveys a different meaning to the transpiler that capital lettered Component is user defined Element and not native DOM element.
-So, capitalization of Component's first letter is just to make our transpiler distinguish between native DOM nodes and our own components or user defined elements.
+Both gives React elements, But Components are much more flexible and reusable than the variable,since it can accept arguments as input and can also perform some logic on it before returning React element.
+Also components need to be in capital letters whereas app which is simply a react element can be in capital or smallcase.Because it conveys a different meaning to the transpiler that capital lettered Component is user defined Element and not native Dom element.
+So, capitalization of Component's first letter is just to make our transpiler distinguish between native Dom nodes and our own components or user defined elements.
 
 ```
-  ReactDOM.render(
+  ReactDom.render(
     app,          // variable
     document.getElementById('root')
   )
 ```
-React allows us to use React.createElemwnt over our component
+React allows us to use React.createElement over our component
 ```
   React.createElement(
     React.createElement(Component), // Functional Component
     document.getElementById('root')
   )
 ```
-The whole point of JSX is not having to write React.createElement everytime
+The whole point of JSX is not having to write React.createElement every time
 ```
   React.createElement(
     <Component></Component>, // JSX
@@ -136,7 +140,7 @@ If we don't have any children i.e if we don't have anything to in between openin
   )
 ```
 Both the above code will get transpiled to React.createElement call over Component.
-Since Componet is user-defined it is not put in with string quotes in React.createElement calls as native elements do.
+Since Component is user-defined it is not put in with string quotes in React.createElement calls as native elements do.
 
 ## Why React
   Things are simpler when UI components are unaware of the network, business logic, or app state. Given the same props, always render the same data.
@@ -193,7 +197,7 @@ What happens behind the scenes is:
   3. After a React element has described a component or the element tree has been created, React creates a instance of the component to keep track of it.
 
       All react does is create a tree of elements.
-      This is very fast , because React elements are plain Javascript objects.And this all happens when the render() method is called.
+      This is very fast , because React elements are plain JavaScript objects.And this all happens when the render() method is called.
       And therefore, this whole process is called **Rendering**.
 
       ### Rendering
@@ -206,18 +210,18 @@ What happens behind the scenes is:
   4. React keeps this tree of elements in memory, and this tree of elements is actually called **Virtual Dom**.
 
       ### Virtual Dom
-      Virtual DOM is basically a JS Object that represents real dom in memory it is actually the tree of elements that describes the Dom Element and the reason its fast is because reading/writing on real DOM is costly but reading/writing on object is not. So reading/writing for any action/event is done on virtual DOM and when any changes are made to virtual DOM it simply changes the real DOM.
+      Virtual Dom is basically a JS Object that represents real Dom in memory it is actually the tree of elements that describes the Dom Element and the reason its fast is because reading/writing on real Dom is costly but reading/writing on object is not. So reading/writing for any action/event is done on virtual Dom and when any changes are made to virtual Dom it simply changes the real Dom.
 
   5. On initial render, React has to insert the full tree into the Dom. Which is very expensive process as there is no other way around it.
 
-  6. If the tree of elements changes due to some state change, which results into a diferent return value and different elements.
-  React once again generates a new tree of elements by starting at the root of the component tree and loop downwards to find all components that have been flagged as needing updates.For each flagged component, React will call either `classComponentInstance.render()` (for class components) or `FunctionComponent()` (for function components), and save the render output.And now we have two trees the old tree and the new tree(the virtual dom).
+  6. If the tree of elements changes due to some state change, which results into a different return value and different elements.
+  React once again generates a new tree of elements by starting at the root of the component tree and loop downwards to find all components that have been flagged as needing updates.For each flagged component, React will call either `classComponentInstance.render()` (for class components) or `FunctionComponent()` (for function components), and save the render output.And now we have two trees the old tree and the new tree(the virtual Dom).
 
-  7. The Next thing to do is to sync the Virtual Dom and real Dom. React can't just re-render the whole tree because making changes to the dom is slow and heavy process.
+  7. The Next thing to do is to sync the Virtual Dom and real Dom. React can't just re-render the whole tree because making changes to the Dom is slow and heavy process.
   And that is where React does **Reconciliation**.
 
       ### Reconciliation
-      Reconciliation is the process through which React updates the DOM. When a component’s state changes, React has to calculate if it is necessary to update the DOM. It does this by creating a virtual DOM and comparing it with the current DOM. In this context, the virtual DOM will contain the new state of the component. 
+      Reconciliation is the process through which React updates the Dom. When a component’s state changes, React has to calculate if it is necessary to update the Dom. It does this by creating a virtual Dom and comparing it with the current Dom. In this context, the virtual Dom will contain the new state of the component. 
 
       React takes the old tree and compares with the new tree and finds the smallest number of operations to transform one tree into another.
       This is handled by the **Diffing Algorithm**
@@ -231,7 +235,7 @@ What happens behind the scenes is:
       It destroys all the component instances in the old tree along with their current state.
       And this actually called **unmounting**.
 
-  8. React then applies all the calculated changes to the DOM in one synchronous sequence.
+  8. React then applies all the calculated changes to the Dom in one synchronous sequence.
 
   React does all the above process in two phases:
   
@@ -242,7 +246,7 @@ What happens behind the scenes is:
 
   Commit Phase: During the commit phase all those  changes are applied to the Dom.
 
-  After React has updated the DOM in the commit phase, it updates all refs accordingly to point to the requested DOM nodes and component instances. It then synchronously runs the `componentDidMount` and `componentDidUpdate` class lifecycle methods, and the `useLayoutEffect` hooks.
+  After React has updated the Dom in the commit phase, it updates all refs accordingly to point to the requested Dom nodes and component instances. It then synchronously runs the `componentDidMount` and `componentDidUpdate` class lifecycle methods, and the `useLayoutEffect` hooks.
 
   React then sets a short timeout, and when it expires, runs all the useEffect hooks. This step is also known as the "Passive Effects" phase.
 
@@ -253,13 +257,13 @@ Based on this React has categorized the lifecycle of a component into 3 differen
 2. Updating
 3. Unmounting
 
-Mounting: Mounting means to put elements into the DOM that involves creating and putting it into the DOM. Mounting phase uses 4 methods to mount a component namely:
+Mounting: Mounting means to put elements into the Dom that involves creating and putting it into the Dom. Mounting phase uses 4 methods to mount a component namely:
 1. *constructor()* : It is called when the component is initiated and it is the best place to initialize our 
     state. It takes props as argument and starts by calling super(props)
-2. *getDerivedStateFromProps()*: It is called right before rendering the element in the dom.It takes 
+2. *getDerivedStateFromProps()*: It is called right before rendering the element in the Dom.It takes 
     props and state as an argument and returns an derived or updated state.
 3. *render()*: It is the only compulsory method required by react.It is responsible for rendering our 
-    JSX to DOM.
+    JSX to Dom.
 4. *componentDidMount()* : This method is called after the component is rendered . It is also used 
     to fetch external data through api
 
@@ -267,23 +271,24 @@ Mounting: Mounting means to put elements into the DOM that involves creating and
 1. *getDerivedStateFromProps()*
 2. *shouldComponentUpdate()*: It is used when you want your state or props to be updated or not 
     basically it checks that rendering should happen or not.It is used for optimization purposes. It 
-    returns a boolean value .
+    returns a Boolean value .
 3. *render()*
-4. *getSnapshotBeforeUpdate()*: It is called right before updating the DOM.It has access to state 
+4. *getSnapshotBeforeUpdate()*: It is called right before updating the Dom.It has access to state 
    and props before the update so that you can check what is the value of state and props right 
     before update.
-5. *componentDidUpdate()*: It is caled after the component has updated in the dom .It is the best 
-    place in updating the dom in response to the change of props and state.
+5. *componentDidUpdate()*: It is called after the component has updated in the Dom .It is the best 
+    place in updating the Dom in response to the change of props and state.
 
 3. Unmounting: This is the final phase of a react component lifecycle.It occurs when a component 
-    has been removed from the dom. It has only one method:
-    1. *componentWillUnmount()*:  It is used for cleanup actions like cancelling api calls , removing 
-        subcriptions and timers. You cannot use setstate here as the component gets unmounted 
+    has been removed from the Dom. It has only one method:
+    1. *componentWillUnmount()*:  It is used for clean-up actions like cancelling api calls , removing 
+        subscriptions and timers. You cannot use setstate here as the component gets unmounted 
         and no re-rendering will happen.
 
 ## Props:
   In React, we call the arguments that we pass to a component as props.
   1. Props is short for properties. It is used for passing data between components since, react follows unidirectional flow therefore props are passed from parent to child component.
+  Props provide our component an interface through which it can access some data from outside And use that data to produce react elements.  
   2. Data from props is read-only and cannot be modified by a component that is receiving from outside i.e props are immutable.
   3. In order to get data in props , we need to define prop attribute on child component and get data from parent component.
   4. Props do not have to be just data but callbacks can also be passed as props.
@@ -295,7 +300,7 @@ Mounting: Mounting means to put elements into the DOM that involves creating and
 
   In computer science, state is defined by input(here referenced as data), output and the transition
 
-  2. Data can be a data structure(an object) or a single value.It is use to initailize or set a default value when a component mounts.
+  2. Data can be a data structure(an object) or a single value.It is use to initialize or set a default value when a component mounts.
   3. A component can create & manage their own data internally for state. i.e it is private to the component.
   4. State can be modified or updated by setState() method and should not be modified directly.
 
@@ -303,10 +308,10 @@ Mounting: Mounting means to put elements into the DOM that involves creating and
   1. *Stateless Components* : They have only props and no internal data, their logic revolves around the props they receive.
   2. *Stateful Components*: They have both props as well as internal data to convey the state.
   
-  props are used by a component to get data from external environment i.e another component ( pure, functional or class) or a general class or javascript/typescript code
+  props are used by a component to get data from external environment i.e another component ( pure, functional or class) or a general class or JavaScript/typescript code
   states are used to manage the internal environment of a component means the data changes inside the component
 
 ## Refs
-  The ref is used to return a reference to the element. They should be avoided in most cases, however, they can be useful when you need a direct access to the DOM element or an instance of a component.
+  The ref is used to return a reference to the element. They should be avoided in most cases, however, they can be useful when you need a direct access to the Dom element or an instance of a component.
 
 
