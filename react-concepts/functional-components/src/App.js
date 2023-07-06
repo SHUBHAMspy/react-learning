@@ -4,6 +4,7 @@ import HelloWorld from './HelloWorld';
 import WithoutJSX from './react Element/Without JSX';
 import MultipleElements from './react Element/Multiple Elements';
 import ReactElement from './react Element/React Element';
+import UserDefinedComponent from './components/UserDefinedComponent';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <ReactElement/>
         <MultipleElements/>
         <WithoutJSX/>
+        <UserDefinedComponent/>
       </header>
     </div>
   );

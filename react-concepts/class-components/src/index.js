@@ -9,7 +9,7 @@ const rootOG = ReactDOM.createRoot(document.getElementById('root-og'));
 // The transition happening between or the process of synchronization happenning between virtual and real Dom is called rendering.
 rootOG.render(        // render function is responsible for rendering.
   <React.StrictMode>
-    <App />
+    <App type="Class"/>
     
   </React.StrictMode>
 );
@@ -19,8 +19,8 @@ const element = <h1 className='test'>Welcome to React</h1>
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(element)
 
-const newElement = <h1 className='test'>React Concepts</h1>
-root.render(newElement)
+// const newElement = <h1 className='test'>React Concepts</h1>
+// root.render(newElement)
 
 
 
