@@ -261,7 +261,7 @@ Based on this React has categorized the lifecycle of a component into 3 differen
 2. Updating
 3. Unmounting
 
-![Initial View](./public/images/phases16.4.png)
+![Initial View](./images/phases16.4.png)
 
 *Mounting*: Mounting means to put elements into the Dom that involves creating and putting it into the Dom. Mounting phase uses 4 methods to mount a component namely:
 1. *constructor()* : It is called when the component is initiated and it is the best place to initialize our 
