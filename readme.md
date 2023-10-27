@@ -8,6 +8,10 @@ In the Dom model, the whole HTML document is considered as an object. Each of th
 Hence, the document is shown by Dom as a set of nodes and objects that can be changed with a scripting language like JavaScript i.e Dom is used to connect or link webpages(HTML documents) to JavaScript because it understands objects and works upon that model consideration that everything is an object, including the document itself which holds all other objects in a parent-child like box structure & everybody is accountable to the parent and through the document node anything can be accessed.  
 
 ## MVC(Model-View-Controller)
+1. DOM manipulation is very expensive which causes applications to behave slow and inefficient.
+2. Due to circular dependencies, a complicated model was created around models and views.
+3. Lot of data changes happens for collaborative applications(like Google Docs).
+4. No way to do undo (travel back in time) easily without adding so much extra code.
 
 ## SPA(Single Page Application)
 
@@ -40,7 +44,7 @@ Hence, the document is shown by Dom as a set of nodes and objects that can be ch
 5. Separation of concerns and modularity.
 6. Scalable UI because of composition and reusable component architecture.
 
-Limitations: 
+*Limitations*: 
 1. Its sole purpose is also its limitation i.e it only handle view layer of the application. Which was its motivation to separate view from network and business logic.
 
 2. It also has some learning curve.
@@ -55,7 +59,7 @@ Things to know:
 **React Element**: A React element is the smallest building blocks of React Apps. It is basically a plain JavaScript object which represents or describes a HTML element, which is created by React.createElement. Not only a react element represents or describes a HTML element but also a react element tree describes a component instance.
 Creating a React Element is cheap compared to creating a Dom Element. 
 
-**React Component**: Components are the building blocks of any React app.A Component is a class or a function that takes input as props and returns/outputs an element tree.
+**React Component**: A component is a self-contained, reusable code block that divides the user interface into smaller pieces rather than building the entire UI in a single file.Components are the building blocks of any React app.A Component is a class or a function that takes input as props and returns/outputs an element tree.
 If it is a function the output is the return value of the function.
 If it is a class the output is the return value of the render() method.
 
@@ -257,9 +261,12 @@ Based on this React has categorized the lifecycle of a component into 3 differen
 2. Updating
 3. Unmounting
 
-Mounting: Mounting means to put elements into the Dom that involves creating and putting it into the Dom. Mounting phase uses 4 methods to mount a component namely:
+![Initial View](./public/images/phases16.4.png)
+
+*Mounting*: Mounting means to put elements into the Dom that involves creating and putting it into the Dom. Mounting phase uses 4 methods to mount a component namely:
 1. *constructor()* : It is called when the component is initiated and it is the best place to initialize our 
-    state. It takes props as argument and starts by calling super(props)
+    state. It takes props as argument and starts by calling super(props).
+    A component's constructor is called only once because React's `reconciliation algorithm` assumes that, if a custom component appears in the same place on subsequent renders, it's the same component as before, so reuses the previous instance rather than creating a new one.
 2. *getDerivedStateFromProps()*: It is called right before rendering the element in the Dom.It takes 
     props and state as an argument and returns an derived or updated state.
 3. *render()*: It is the only compulsory method required by react.It is responsible for rendering our 
@@ -267,7 +274,7 @@ Mounting: Mounting means to put elements into the Dom that involves creating and
 4. *componentDidMount()* : This method is called after the component is rendered . It is also used 
     to fetch external data through api
 
-2. Updating Phase: This is the second phase of the react component lifecycle. A component is updated when there is change in state and props .While updating components react calls these 5 methods inorder namely:
+2. *Updating Phase*: This is the second phase of the react component lifecycle. A component is updated when there is change in state and props .While updating components react calls these 5 methods inorder namely:
 1. *getDerivedStateFromProps()*
 2. *shouldComponentUpdate()*: It is used when you want your state or props to be updated or not 
     basically it checks that rendering should happen or not.It is used for optimization purposes. It 
@@ -279,7 +286,7 @@ Mounting: Mounting means to put elements into the Dom that involves creating and
 5. *componentDidUpdate()*: It is called after the component has updated in the Dom .It is the best 
     place in updating the Dom in response to the change of props and state.
 
-3. Unmounting: This is the final phase of a react component lifecycle.It occurs when a component 
+3. *Unmounting*: This is the final phase of a react component lifecycle.It occurs when a component 
     has been removed from the Dom. It has only one method:
     1. *componentWillUnmount()*:  It is used for clean-up actions like cancelling api calls , removing 
         subscriptions and timers. You cannot use setstate here as the component gets unmounted 
@@ -306,12 +313,118 @@ Mounting: Mounting means to put elements into the Dom that involves creating and
 
   And because of these differences we have two classes of components:
   1. *Stateless Components* : They have only props and no internal data, their logic revolves around the props they receive.
-  2. *Stateful Components*: They have both props as well as internal data to convey the state.
+  2. *Stateful Components*: They have both props as well as internal data to convey the state.A stateful component declares and manages local state in it
   
   props are used by a component to get data from external environment i.e another component ( pure, functional or class) or a general class or JavaScript/typescript code
   states are used to manage the internal environment of a component means the data changes inside the component
 
+## Prop Drilling
+Prop Drilling is the process by which you pass data from one component of the React Component tree to another by going through other components that do not need the data but only help in passing it around.
+
+## Lifting the State
+When several components need to share the same changing data then it is recommended to lift the shared state up to their closest common ancestor. That means if two child components share the same data from its parent, then move the state to parent instead of maintaining local state in both of the child components.
+
+## Controlled & Uncontrolled Components
+*Controlled Components*: A Controlled Component is one that takes its current value through props and notifies changes through callbacks like `onChange`. A parent component "controls" it by handling the callback and managing its own state & passing new values as props to the controlled component.
+
+*Uncontrolled Components*:  Uncontrolled Components are the ones that store their own state internally, and you query the DOM using a ref to find its current value when you need it.
+
+  ```
+  //Controlled
+  <input type="text" value={value} onChange={handleChange} />
+
+  //UnControlled
+  <input type="text" defaultValue="John Doe" ref={inputRef} />
+  ```
+
 ## Refs
   The ref is used to return a reference to the element. They should be avoided in most cases, however, they can be useful when you need a direct access to the Dom element or an instance of a component.
 
+## HOC
+While developing React applications, we might develop components that are quite similar to each other with minute differences. In most cases, developing similar components might not be an issue but, while developing larger applications we need to keep our code DRY, therefore, we want an abstraction that allows us to define this logic in a single place and share it across components. HOC allows us to create that abstraction.
 
+## Pure Components
+Pure Component: A component is considered pure if it renders the same output for the same props and state. It is similar to the concept of pure functions in functional programming.
+Pure functions meet two conditions :
+1. Its return value is only determined  by its input values.
+2. For the same input it always returns the same output.
+For this type of component , React provides the PureComponent base class. Class components that extend the React.PureComponent class are treated as pure components.
+
+Pure Components have some performance improvements and render optimizations since React implements the shouldComponentUpdate() method for them with a shallow comparison for props and state.
+
+Pure component is similar to Regular components but the only difference between them is that Regular component doesn't implement shouldComponentUpdate() but pure component implements it with a shallow prop and state comparisons.
+shouldComponentUpdate() only shallowly compares the objects. If these contain complex data structures it may produce false for deeper differences.
+Shallow comparisons works by checking if two values are equal in case of primitives types like string , numbers and in case of objects it will just check the reference not the values inside that object.  
+
+## Fragments
+Fragments let you group a list of children without adding extra nodes to the DOM. You need to use either or a shorter syntax having empty tag (<></>).
+
+```
+function Card({title, description, date}) {
+  return (
+      <Fragment>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <p>{date}</p>
+      </Fragment>
+    );
+}
+```
+Benefits:
+1. Fragments are a bit faster and use less memory by not creating an extra DOM node. This only has a real benefit on very large and deep trees.
+2. Some CSS mechanisms like Flexbox and CSS Grid have a special parent-child relationships, and adding divs in the middle makes it hard to keep the desired layout.
+3. The DOM Inspector is less cluttered.
+
+Ususally you don't need to use until unless there is a need of key attribute. The usage of shorter syntax looks like below.
+
+```
+function Card({title, description, date}) {
+  return (
+      <>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <p>{date}</p>
+      </>
+    );
+}
+```
+
+## Hooks
+React Hooks are JavaScript functions that we can use to isolate and manage reusable stateful logic and side effects from a functional component. Hooks with all that stateful logic can be composed or used into components as hooks are functions too. In React, hooks let's us "hook into" React state and lifecycle features from a functional component. As previously, functional components were called stateless components.
+Only class components were used for state management and lifecycle methods. The need to change a functional component to a class component, whenever state management or lifecycle methods were to be used, led to the development of Hooks.
+
+Stateful logic can be anything that needs to declare and manage a state variable locally.
+For example, the logic to fetch data and manage the data in a local variable is stateful. We may also want to reuse the fetching logic in multiple components.
+
+There are 2 types of hooks:
+1. Built-in Hooks/Default Hooks
+2. Custom Hooks
+
+Benefits of using hooks:
+1. React Hooks will avoid a lot of overheads such as the instance creation, binding of events, etc., that are present with classes.
+2. Hooks in React will result in smaller component trees since they will be avoiding the nesting that exists in HOCs (Higher Order Components) and with render props which result in less amount of work to be done by React.
+
+- useState: To manage states. Returns a stateful value and an updater function to update it.
+- useEffect: To manage side-effects like API calls, subscriptions, timers, mutations, and more.
+- useContext: To return the current value for a context.
+- useReducer: A useState alternative to help with complex state management.
+- useCallback: It returns a memorized version of a callback to help a child component not re-render unnecessarily.
+- useMemo: It returns a memoized value that helps in performance optimizations.
+- useRef: It returns a ref object with a .current property. The ref object is mutable. It is mainly used to access a child component imperatively.
+- useLayoutEffect: It fires at the end of all DOM mutations. It's best to use useEffect as much as possible over this one as the useLayoutEffect fires synchronously.
+- useDebugValue: Helps to display a label in React DevTools for custom hooks.
+
+
+
+## The setState()
+The setState() is an asynchronous operation. React batches multiple `setState()` state changes into a single update or call for performance reasons, so the state may not change immediately after setState() is called. That means you should not rely on the current state when calling setState() since you can't be sure what that state will be. The solution is to pass a function to setState(), with the previous state as an argument. By doing this you can avoid issues with the user getting the old state value on access due to the asynchronous nature of setState().
+
+Let's say the initial count value is zero. After three consecutive increment operations, the value is going to be incremented only by one.
+
+  ```
+    // assuming this.state.count === 0
+    this.setState({ count: this.state.count + 1 });
+    this.setState({ count: this.state.count + 1 });
+    this.setState({ count: this.state.count + 1 });
+    // this.state.count === 1, not 3
+  ```
