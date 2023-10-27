@@ -343,6 +343,61 @@ When several components need to share the same changing data then it is recommen
 ## HOC
 While developing React applications, we might develop components that are quite similar to each other with minute differences. In most cases, developing similar components might not be an issue but, while developing larger applications we need to keep our code DRY, therefore, we want an abstraction that allows us to define this logic in a single place and share it across components. HOC allows us to create that abstraction.
 
+## Render Props
+Render Props is a simple technique for sharing code between components using a prop whose value is a function.
+A component with a render prop takes a function that returns a React element and calls it instead of implementing its own render logic.
+Put simply, a render prop is a function prop that is called in a render method. 
+This pattern is about DYNAMIC composition. Core/reusable logics stays in the component while the moving parts get passed as a callback prop.
+
+    Note: You can create HOCs through render props.While the opposite is not true.
+
+```
+const withRouter = Component => {
+  const C = props => {
+    const { wrappedComponentRef, ...remainingProps } = props;
+    return (
+      <Route
+        render={routeComponentProps => (
+          <Component
+            {...remainingProps}
+            {...routeComponentProps}
+            ref={wrappedComponentRef}
+          />
+        )}
+      />
+    );
+  };
+  ...
+  return hoistStatics(C, Component);
+}; 
+
+```
+
+There’s an important edge case to keep in mind when using the render props pattern if you use React.PureComponent. For a quick refresher, PureComponent can provide small performance gains because it implements shouldComponentUpdate internally through a shallow props and state comparison.
+
+The important thing to note here is the shallow props comparison. Most of the time, when you use render props, you’ll be passing an anonymous function to the render prop.
+
+```
+class Dismiss extends React.PureComponent {
+  dismiss = () => {
+    ...code to implement dismissal animations etc
+  }
+
+  render() {
+    return this.props.render(dismiss)
+  }
+}
+      OR
+
+const DismissableContent = () => {
+  return (
+    <Dismiss render={
+      dismiss => <Content dismiss={dismiss} /> // will be different every render
+    } />
+  )
+}
+```
+
 ## Pure Components
 Pure Component: A component is considered pure if it renders the same output for the same props and state. It is similar to the concept of pure functions in functional programming.
 Pure functions meet two conditions :
