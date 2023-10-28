@@ -325,7 +325,7 @@ Based on this React has categorized the lifecycle of a component into 3 differen
 There are 2 ways to send data between react components:
 1. Parent Component to Child Component (using props)
 2. Child Component to Parent Component (using callbacks)
-![data-flow](dataflow.png)
+![dataflow](./images/dataflow.png)
 
 - *Parent to child*: With the help of props, we can send data from a parent to a child component.
 ```
@@ -357,27 +357,27 @@ There are 2 ways to send data between react components:
     - Send data from the child component using the callback.
 
   ```
-function ParentComponent(props) {
-let [counter, setCounter] = useState(0);
-let callback = valueFromChild => setCounter(valueFromChild);
-  return (
-    <div>
-      <p>Value of counter: {counter}</p>
-      <ChildComponent callbackFunc={callback} counterValue={counter} />
-    </div>
-  );
-}
+    function ParentComponent(props) {
+    let [counter, setCounter] = useState(0);
+    let callback = valueFromChild => setCounter(valueFromChild);
+      return (
+        <div>
+          <p>Value of counter: {counter}</p>
+          <ChildComponent callbackFunc={callback} counterValue={counter} />
+        </div>
+      );
+    }
 
-function ChildComponent(props) {
-let childCounterValue = props.counterValue;
-return (
-  <div>
-    <button onClick={() => props.callbackFunc(++childCounterValue)}>
-      Increment Counter
-    </button>
-  </div>
-);
-}
+    function ChildComponent(props) {
+    let childCounterValue = props.counterValue;
+    return (
+      <div>
+        <button onClick={() => props.callbackFunc(++childCounterValue)}>
+          Increment Counter
+        </button>
+      </div>
+    );
+    }
   ```
 
 ## Prop Drilling
