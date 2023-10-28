@@ -194,14 +194,17 @@ What happens behind the scenes is:
       > Note: The Fact that JSX gets converted into React.createElement() function call is the reason we always have to import React at the top while working with JSX.
 
 
+      
+  3. *Instantiation*:After a React element has described a component or the element tree has been created, React creates a instance of the component to keep track of it.
+
       We actually don't call a component we just  mention it in the JSX like this `<App/>`.React  calls it behind the scenes.
       - If it is a function React calls it directly with the assigned props.
       - If it is a class React creates a new instance of it and calls it render() method.
 
       React not only calls our component but also manages the component instances by mounting and unmounting them.
-      
-  3. After a React element has described a component or the element tree has been created, React creates a instance of the component to keep track of it.
+  4. *Initialization*: During the instantiation, React will initialize the component's state and props. The component's constructor or function will be  called, and any necessary setup can be performed in this step.
 
+  5. *Render*:After the component is instantiated, React will call the render method (for class components) or the component function (for functional components) to determine what should be rendered to the DOM. This returns a tree of React elements, which can include both user-defined components and native DOM elements.
       All react does is create a tree of elements.
       This is very fast , because React elements are plain JavaScript objects.And this all happens when the render() method is called.
       And therefore, this whole process is called **Rendering**.
@@ -213,14 +216,14 @@ What happens behind the scenes is:
 
       > Note:
 
-  4. React keeps this tree of elements in memory, and this tree of elements is actually called **Virtual Dom**.
+  6. React keeps this tree of elements in memory, and this tree of elements is actually called **Virtual Dom**.
 
       ### Virtual Dom
       Virtual Dom is basically a JS Object that represents real Dom in memory it is actually the tree of elements that describes the Dom Element and the reason its fast is because reading/writing on real Dom is costly but reading/writing on object is not. So reading/writing for any action/event is done on virtual Dom and when any changes are made to virtual Dom it simply changes the real Dom.
 
   5. On initial render, React has to insert the full tree into the Dom. Which is very expensive process as there is no other way around it.
 
-  6. If the tree of elements changes due to some state change, which results into a different return value and different elements.
+  6. *Update the DOM*:If the tree of elements changes due to some state change, which results into a different return value and different elements.
   React once again generates a new tree of elements by starting at the root of the component tree and loop downwards to find all components that have been flagged as needing updates.For each flagged component, React will call either `classComponentInstance.render()` (for class components) or `FunctionComponent()` (for function components), and save the render output.And now we have two trees the old tree and the new tree(the virtual Dom).
 
   7. The Next thing to do is to sync the Virtual Dom and real Dom. React can't just re-render the whole tree because making changes to the Dom is slow and heavy process.
@@ -241,6 +244,7 @@ What happens behind the scenes is:
       It destroys all the component instances in the old tree along with their current state.
       And this actually called **unmounting**.
 
+      > Note: It's important to note that React goes through its virtualDOM and creates a list of those changes that need to be made to the actual DOM. Meaning that React will wait to commit all the updates so it does it in one swift process and not in parts. This is what it means when you read that React does batch updates. This is crucial to understand when working with state.
   8. React then applies all the calculated changes to the Dom in one synchronous sequence.
 
   React does all the above process in two phases:
@@ -325,6 +329,7 @@ Based on this React has categorized the lifecycle of a component into 3 differen
 There are 2 ways to send data between react components:
 1. Parent Component to Child Component (using props)
 2. Child Component to Parent Component (using callbacks)
+
 ![dataflow](./images/dataflow.png)
 
 - *Parent to child*: With the help of props, we can send data from a parent to a child component.
