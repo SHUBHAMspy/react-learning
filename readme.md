@@ -17,7 +17,7 @@ Hence, the document is shown by Dom as a set of nodes and objects that can be ch
 
 
 ## What is React
-- React is an efficient, flexible and open-source JavaScript Library for building simple and scalable front-ends, created by Facebook.
+- React is an efficient, flexible and open-source frontend JavaScript Library for building simple and scalable  user interfaces , created by Facebook.
 - It is basically used to build Single Page Applications. It also allows us to create reusable  UI components.
 - React.JS is not a framework of JavaScript like Angular or React Native.
 - It handles the View layer of MVC (Model View Controller) application.
@@ -46,8 +46,10 @@ Hence, the document is shown by Dom as a set of nodes and objects that can be ch
 
 *Limitations*: 
 1. Its sole purpose is also its limitation i.e it only handle view layer of the application. Which was its motivation to separate view from network and business logic.
+2. React is not a full-blown framework as it is only a library.
 
-2. It also has some learning curve.
+3. It also has some learning curve.
+4. Coding might become complex as it will make use of inline templating and JSX.
 
 
 Things to know:
@@ -56,7 +58,7 @@ Things to know:
 - Component Instance
 - JSX
 
-**React Element**: A React element is the smallest building blocks of React Apps. It is basically a plain JavaScript object which represents or describes a HTML element, which is created by React.createElement. Not only a react element represents or describes a HTML element but also a react element tree describes a component instance.
+**React Element**: A React element is the smallest building blocks of React Apps. It is basically a plain JavaScript object which represents or describes a HTML element, which is created by `React.createElement`. Not only a react element represents or describes a HTML element but also a react element tree describes a component instance.
 Creating a React Element is cheap compared to creating a Dom Element. 
 
 **React Component**: A component is a self-contained, reusable code block that divides the user interface into smaller pieces rather than building the entire UI in a single file.Components are the building blocks of any React app.A Component is a class or a function that takes input as props and returns/outputs an element tree.
@@ -88,7 +90,7 @@ render([what],[where]) method takes two arguments, the second argument is the ta
 So, React knows how to create components as well as to compose them.
 Whereas, react-Dom is a renderer package which handles the Dom part of react and is responsible for making changes in the environment to render the UI on the corresponding platform.
 
-**JSX**: JSX is JavaScript Syntax Extension it is nothing but extension to JavaScript but not exactly a JavaScript code. It gets compiled/ transpiled during the build process to React.createElement calls which is a valid JS that our browser can understand. It replaces the need of using React.createElement() method  by providing a more concise and declarative syntax. 
+**JSX**: JSX is JavaScript Syntax Extension it is nothing but extension to JavaScript but not exactly a JavaScript code. It gets compiled/ transpiled during the build process to `React.createElement` calls which is a valid JS that our browser can understand. It replaces the need of using `React.createElement()` method  by providing a more concise and declarative syntax. 
 Since HTML style of Dom element creation is much more expressive,concise and declarative. So, JSX let's us use the same HTML like syntax inside our JavaScript code i.e in a declarative manner which will eventually produce Dom nodes on the webpage.
 
 >Note : Any JavaScript coding that needs to be evaluated must be kept in {} . But we don't need to use {} for strings
@@ -318,6 +320,66 @@ Based on this React has categorized the lifecycle of a component into 3 differen
   props are used by a component to get data from external environment i.e another component ( pure, functional or class) or a general class or JavaScript/typescript code
   states are used to manage the internal environment of a component means the data changes inside the component
 
+
+### Passing data between Components
+There are 2 ways to send data between react components:
+1. Parent Component to Child Component (using props)
+2. Child Component to Parent Component (using callbacks)
+![data-flow](dataflow.png)
+
+- *Parent to child*: With the help of props, we can send data from a parent to a child component.
+```
+    import ChildComponent from "./Child";
+    function ParentComponent(props) {
+      let [counter, setCounter] = useState(0);
+    
+      let increment = () => setCounter(++counter);
+    
+      return (
+        <div>
+          <button onClick={increment}>Increment Counter</button>
+          <ChildComponent counterValue={counter} />
+        </div>
+      );
+    }
+
+    function ChildComponent(props) {
+      return (
+        <div>
+          <p>Value of counter: {props.counterValue}</p>
+        </div>
+      );
+    }
+```
+- *Child to Parent*: 
+    - Create a callback in the parent component which takes in the data needed as a parameter.
+    - Pass this callback as a prop to the child component.
+    - Send data from the child component using the callback.
+
+  ```
+function ParentComponent(props) {
+let [counter, setCounter] = useState(0);
+let callback = valueFromChild => setCounter(valueFromChild);
+  return (
+    <div>
+      <p>Value of counter: {counter}</p>
+      <ChildComponent callbackFunc={callback} counterValue={counter} />
+    </div>
+  );
+}
+
+function ChildComponent(props) {
+let childCounterValue = props.counterValue;
+return (
+  <div>
+    <button onClick={() => props.callbackFunc(++childCounterValue)}>
+      Increment Counter
+    </button>
+  </div>
+);
+}
+  ```
+
 ## Prop Drilling
 Prop Drilling is the process by which you pass data from one component of the React Component tree to another by going through other components that do not need the data but only help in passing it around.
 
@@ -450,6 +512,8 @@ Only class components were used for state management and lifecycle methods. The 
 
 Stateful logic can be anything that needs to declare and manage a state variable locally.
 For example, the logic to fetch data and manage the data in a local variable is stateful. We may also want to reuse the fetching logic in multiple components.
+
+![Hooks](./images/Hooks.png)
 
 There are 2 types of hooks:
 1. Built-in Hooks/Default Hooks
